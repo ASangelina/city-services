@@ -1,6 +1,8 @@
 import { Module } from '@nestjs/common';
-
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { InfrastructureModule } from './infrastructure/infrastructure.module';
+import { DomainModule } from './domain/domain.module';
+import { ApplicationModule } from './application/application.module';
 
 @Module({
   imports: [
@@ -14,6 +16,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       entities: [],
       synchronize: true,
     }),
+    InfrastructureModule,
+    DomainModule,
+    ApplicationModule,
   ],
   controllers: [],
   providers: [],
