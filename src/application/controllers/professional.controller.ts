@@ -27,4 +27,9 @@ export class ProfessionalController {
       throw new NotFoundException({ error: error.message });
     }
   }
+
+  @Get()
+  async listProfessionals() {
+    return await this.professionalService.listProfessionals();
+  }
 }
