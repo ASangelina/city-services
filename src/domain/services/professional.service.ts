@@ -44,4 +44,8 @@ export class ProfessionalService {
 
     return professional;
   }
+
+  async listProfessionals(): Promise<Professional[]> {
+    return await this.professionalRepository.findAll();
+  }
 }
