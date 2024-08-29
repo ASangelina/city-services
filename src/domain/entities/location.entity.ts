@@ -12,6 +12,8 @@ export class Location {
   @Column()
   state: string;
 
-  @OneToMany(() => Professional, (professional) => professional.location)
+  @OneToMany(() => Professional, (professional) => professional.location, {
+    onDelete: 'CASCADE',
+  })
   professionals: Professional[];
 }

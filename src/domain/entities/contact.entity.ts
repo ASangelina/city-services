@@ -15,6 +15,8 @@ export class Contact {
   @Column()
   instagram: string;
 
-  @OneToOne(() => Professional, (professional) => professional.contact)
+  @OneToOne(() => Professional, (professional) => professional.contact, {
+    onDelete: 'CASCADE',
+  })
   professional: Professional;
 }

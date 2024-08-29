@@ -19,18 +19,21 @@ export class Professional {
   @Column()
   name: string;
 
-  @Column()
-  email: string;
-
-  @ManyToOne(() => Service, (service) => service.professionals)
-  @JoinColumn({ foreignKeyConstraintName: 'service_id' })
+  @ManyToOne(() => Service, (service) => service.professionals, {
+    cascade: true,
+  })
+  @JoinColumn({ name: 'service_id' })
   service: Service;
 
-  @ManyToOne(() => Location, (location) => location.professionals)
-  @JoinColumn({ foreignKeyConstraintName: 'location_id' })
+  @ManyToOne(() => Location, (location) => location.professionals, {
+    cascade: true,
+  })
+  @JoinColumn({ name: 'location_id' })
   location: Location;
 
-  @OneToOne(() => Contact, (contact) => contact.professional)
-  @JoinColumn({ foreignKeyConstraintName: 'contact_id' })
+  @OneToOne(() => Contact, (contact) => contact.professional, {
+    cascade: true,
+  })
+  @JoinColumn({ name: 'contact_id' })
   contact: Contact;
 }

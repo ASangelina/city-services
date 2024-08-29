@@ -12,6 +12,8 @@ export class Service {
   @Column()
   category: string;
 
-  @OneToMany(() => Professional, (professional) => professional.service)
+  @OneToMany(() => Professional, (professional) => professional.service, {
+    onDelete: 'CASCADE',
+  })
   professionals: Professional[];
 }
