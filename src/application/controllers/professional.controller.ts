@@ -20,7 +20,7 @@ export class ProfessionalController {
   }
 
   @Get(':id')
-  getUserById(@Param('id') id: string) {
+  getProfessionalById(@Param('id') id: string) {
     try {
       return this.professionalService.getProfessionalById(id);
     } catch (error) {
