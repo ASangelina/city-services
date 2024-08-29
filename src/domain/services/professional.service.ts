@@ -34,4 +34,14 @@ export class ProfessionalService {
 
     return this.professionalRepository.save(professional);
   }
+
+  async getProfessionalById(id: string): Promise<Professional> {
+    const professional = await this.professionalRepository.findById(id);
+
+    if (!professional) {
+      throw new Error('Professional not found');
+    }
+
+    return professional;
+  }
 }

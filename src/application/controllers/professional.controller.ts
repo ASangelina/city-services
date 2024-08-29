@@ -1,4 +1,4 @@
-import { Controller, Post, Body, BadRequestException } from '@nestjs/common';
+import { Controller, Post, Body,  Get, Param, BadRequestException, NotFoundException} from '@nestjs/common';
 import { CreateProfessionalDto } from '../dtos/create-professional.dto';
 import { ProfessionalService } from '../../domain/services/professional.service';
 
@@ -16,6 +16,15 @@ export class ProfessionalController {
       );
     } catch (error) {
       throw new BadRequestException({ error: error.message });
+    }
+  }
+
+  @Get(':id')
+  getUserById(@Param('id') id: string) {
+    try {
+      return this.professionalService.getProfessionalById(id);
+    } catch (error) {
+      throw new NotFoundException({ error: error.message });
     }
   }
 }
