@@ -7,12 +7,16 @@ import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateProfessionalDto {
 
-  @ApiProperty({example: 'Mary', description: 'Nome do prestador de serviços'})
+  @ApiProperty({example: 'Mary', description: 'Name of the service provider'})
   @IsString()
   name: string;
 
   @ApiProperty({
-    description: 'Detalhes do serviço oferecido pelo prestador de serviços',
+    example: {
+      description: 'Residential plumbing installation',
+      category: 'Plumbing',
+    },
+    description: 'Details of the service offered by the service provider',
     type: CreateServiceDto,
   })
   @ValidateNested()
@@ -20,7 +24,12 @@ export class CreateProfessionalDto {
   service: CreateServiceDto;
 
   @ApiProperty({
-    description: 'Detalhes de contato do prestador de serviços',
+    example: {
+      phoneNumber: '+55 11 98765-4321',
+      email: 'contact@provider.com',
+      instagram: '@provider',
+    },
+    description: 'Contact details of the service provider',
     type: CreateContactDto,
   })
   @ValidateNested()
@@ -28,7 +37,11 @@ export class CreateProfessionalDto {
   contact: CreateContactDto;
 
   @ApiProperty({
-    description: 'Localização onde o prestador de serviços opera',
+    example: {
+      city: 'New York',
+      state: 'NY',
+    },
+    description: 'Location where the service provider operates',
     type: CreateLocationDto,
   })
   @ValidateNested()

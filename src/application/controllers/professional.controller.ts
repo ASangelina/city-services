@@ -1,4 +1,4 @@
-import { Controller, Post, Body,  Get, Param, BadRequestException, NotFoundException} from '@nestjs/common';
+import { Controller, Post, Body,  Get, Param, BadRequestException, NotFoundException, HttpStatus, HttpException} from '@nestjs/common';
 import { CreateProfessionalDto } from '../dtos/create-professional.dto';
 import { ProfessionalService } from '../../domain/services/professional.service';
 import { ApiBody, ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
@@ -9,31 +9,34 @@ import { Professional } from 'src/domain/entities/professional.entity';
 export class ProfessionalController {
   constructor(private readonly professionalService: ProfessionalService) {}
 
-  @Post()
+  @Post('create')
   @ApiOperation({
-    summary: 'Criar um novo prestador de serviços',
-    description: 'Cria um novo prestador de serviços com base nas informações fornecidas. O prestador é adicionado ao sistema e suas informações são retornadas.',
+    summary: 'Create a new service provider',
+    description: 'Creates a new service provider based on the provided information. The provider is added to the system and their information is returned.',
   })
   @ApiBody({
-    description: 'Dados do prestador de serviços a ser criado',
-    type: CreateProfessionalDto, // Substitua por seu DTO apropriado
+    description: 'Data of the service provider to be created',
+    type: CreateProfessionalDto,
   })
   @ApiResponse({
     status: 201,
-    description: 'Prestador de serviços criado com sucesso.',
+    description: 'Service provider successfully created.',
     type: CreateProfessionalDto,
   })
   @ApiResponse({
     status: 400,
-    description: 'Erro de solicitação inválida. A entrada fornecida pode estar incorreta ou incompleta.',
+    description: 'Invalid request error. The provided input may be incorrect or incomplete.',
   })
   async createProfessional(
     @Body() createProfessionalDto: CreateProfessionalDto,
   ) {
-    try {
-      return await this.professionalService.createProfessional(
-        createProfessionalDto,
-      );
+    try{
+    const professional = await this.professionalService.createProfessional(createProfessionalDto);
+      return {
+        statusCode: HttpStatus.CREATED,
+        message: 'Service provider successfully created.',
+        data: professional,
+      };
     } catch (error) {
       throw new BadRequestException({ error: error.message });
     }
@@ -41,35 +44,52 @@ export class ProfessionalController {
 
   @Get(':id')
   @ApiOperation({
-    summary: 'Obter um prestador de serviços por ID',
-    description: 'Recupera os detalhes de um prestador de serviços com base no ID fornecido. Retorna as informações do prestador se encontrado.',
+    summary: 'Get a service provider by ID',
+    description: 'Retrieves the details of a service provider based on the provided ID. Returns the provider\'s information if found.',
   })
   @ApiParam({
     name: 'id',
-    description: 'ID único do prestador de serviços',
+    description: 'Unique ID of the service provider',
     type: String,
   })
   @ApiResponse({
     status: 200,
-    description: 'Detalhes do prestador de serviços retornados com sucesso.',
+    description: 'Service provider details successfully returned.',
     type: Professional, 
   })
   @ApiResponse({
     status: 404,
-    description: 'Prestador de serviços não encontrado com o ID fornecido.',
+    description: 'Service provider not found with the provided ID.',
   })
-  getProfessionalById(@Param('id') id: string) {
+  async getProfessionalById(@Param('id') id: string) {
     try {
-      return this.professionalService.getProfessionalById(id);
+      const professional = await this.professionalService.getProfessionalById(id);
+      if (!professional) {
+        throw new HttpException('Service provider not found', HttpStatus.NOT_FOUND);
+      }
+      return {
+        statusCode: HttpStatus.OK,
+        message: 'Service provider details successfully returned.',
+        data: professional,
+      };
     } catch (error) {
       throw new NotFoundException({ error: error.message });
     }
   }
 
   @Get()
-  @ApiOperation({ summary: 'Retorna todos os prestadores de serviços' })
-  @ApiResponse({ status: 200, description: 'Obtém uma lista de todos os prestadores de serviços cadastrados. Inclui informações como nome, tipo de serviço, cidade e contato.' })
+  @ApiOperation({ summary: 'Retrieve all service providers' })
+  @ApiResponse({ status: 200, description: 'Gets a list of all registered service providers. Includes information such as name, service type, city, and contact details.' })
   async listProfessionals() {
-    return await this.professionalService.listProfessionals();
+    try {
+      const professionals = await this.professionalService.listProfessionals();
+      return {
+        statusCode: HttpStatus.OK,
+        message: 'All professionals retrieved successfully',
+        data: professionals,
+      };
+    } catch (error) {
+      throw new BadRequestException({ error: error.message });
+    }
   }
 }
