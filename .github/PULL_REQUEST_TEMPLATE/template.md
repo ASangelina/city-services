@@ -18,7 +18,7 @@ Descreva os testes realizados para verificar se a alteração funciona conforme 
 
 Marque com um `x` todas as opções que se aplicam:
 - [ ] O código segue o padrão de estilo deste projeto.
-- [ ] Rivisei meu próprio código.
+- [ ] Revisei meu próprio código.
 - [ ] Comentei meu código
 - [ ] Foram adicionados testes.
 - [ ] Documentação foi atualizada.
