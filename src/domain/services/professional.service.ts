@@ -48,4 +48,22 @@ export class ProfessionalService {
   async listProfessionals(): Promise<Professional[]> {
     return await this.professionalRepository.findAll();
   }
+
+  async updateProfessional(
+    id: string,
+    name: string,
+  ): Promise<Professional | null> {
+    const professional = await this.getProfessionalById(id);
+
+    if (professional) {
+      professional.name = name;
+      return await this.professionalRepository.save(professional);
+    }
+
+    return null;
+  }
+
+  async deleteProfessional(id: string): Promise<boolean> {
+    return await this.professionalRepository.delete(id);
+  }
 }
