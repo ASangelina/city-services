@@ -7,7 +7,7 @@ import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateProfessionalDto {
 
-  @ApiProperty({example: 'Mary', description: 'Name of the service provider'})
+  @ApiProperty({example: 'Daniele', description: 'Name of the service provider'})
   @IsString()
   name: string;
 
