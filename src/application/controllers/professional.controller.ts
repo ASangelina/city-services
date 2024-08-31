@@ -158,4 +158,49 @@ export class ProfessionalController {
       throw new BadRequestException({ error: error.message });
     }
   }
+
+  @Get('city/:city')
+  @ApiOperation({ summary: 'Find professionals by city' })
+  @ApiParam({
+    name: 'city',
+    description: 'Name of the city to filter professionals',
+    example: 'New York',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Returns a list of professionals based on the specified city.',
+  })
+  async findProfessionalByCity(
+    @Param('city') city: string,
+  ): Promise<Professional[]> {
+    try {
+      return await this.professionalService.findProfessionalByCity(city);
+    } catch (error) {
+      throw new BadRequestException({ error: error.message });
+    }
+  }
+
+  @Get('service/category/:category')
+  @ApiOperation({ summary: 'Find professionals by category service' })
+  @ApiParam({
+    name: 'category',
+    description: 'category of the service to filter professionals',
+    example: 'Plumbing',
+  })
+  @ApiResponse({
+    status: 200,
+    description:
+      'Returns a list of professionals based on the specified category service.',
+  })
+  async findProfessionalByCategoryService(
+    @Param('category') category: string,
+  ): Promise<Professional[]> {
+    try {
+      return await this.professionalService.findProfessionalByCategoryService(
+        category,
+      );
+    } catch (error) {
+      throw new BadRequestException({ error: error.message });
+    }
+  }
 }
