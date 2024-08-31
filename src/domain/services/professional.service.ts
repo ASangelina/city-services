@@ -66,4 +66,14 @@ export class ProfessionalService {
   async deleteProfessional(id: string): Promise<boolean> {
     return await this.professionalRepository.delete(id);
   }
+
+  async findProfessionalByCity(city: string): Promise<Professional[]> {
+    return await this.professionalRepository.findProfessionalByCity(city);
+  }
+
+  async findProfessionalByCategoryService(
+    category: string,
+  ): Promise<Professional[]> {
+    return await this.professionalRepository.findProfessionalByCategoryService(category);
+  }
 }

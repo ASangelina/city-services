@@ -32,4 +32,20 @@ export class ProfessionalRepository implements IProfessionalRepository {
     const result = await this.professionalRepository.delete(id);
     return result.affected > 0;
   }
+
+  async findProfessionalByCity(city: string): Promise<Professional[]> {
+    return await this.professionalRepository.find({
+      where: { location: { city } },
+      relations: ['contact', 'location', 'service'],
+    });
+  }
+
+  async findProfessionalByCategoryService(
+    category: string,
+  ): Promise<Professional[]> {
+    return await this.professionalRepository.find({
+      where: { service: { category: category } },
+      relations: ['contact', 'location', 'service'],
+    });
+  }
 }
