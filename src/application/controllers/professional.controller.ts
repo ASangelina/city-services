@@ -21,7 +21,7 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { Professional } from 'src/domain/entities/professional.entity';
-import { UpdateProfessionalDto } from '../dtos/update-professional';
+import { UpdateProfessionalDto } from '../dtos/update-professional.dto';
 
 @ApiTags('professionals')
 @Controller('professionals')

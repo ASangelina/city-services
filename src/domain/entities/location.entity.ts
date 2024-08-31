@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn, OneToMany, ManyToOne } from "typeorm";
 import { Professional } from './professional.entity';
 
 @Entity('Locations')
@@ -12,7 +12,7 @@ export class Location {
   @Column()
   state: string;
 
-  @OneToMany(() => Professional, (professional) => professional.location, {
+  @ManyToOne(() => Professional, (professional) => professional.location, {
     onDelete: 'CASCADE',
   })
   professionals: Professional[];

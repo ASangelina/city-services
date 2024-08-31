@@ -1,5 +1,7 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { IsString } from "class-validator";
+import { IsString, ValidateNested } from "class-validator";
+import { Type } from "class-transformer";
+import { CreateServiceDto } from "./create-service.dto";
 
 export class UpdateProfessionalDto {
   @ApiProperty({
