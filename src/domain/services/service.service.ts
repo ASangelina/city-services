@@ -15,6 +15,6 @@ export class ServiceService {
     newService.description = service.description;
     newService.category = service.category;
 
-    return this.serviceRepository.save(newService);
+    return await this.serviceRepository.save(newService);
   }
 }

@@ -24,6 +24,6 @@ export class LocationService {
     newLocation.city = location.city;
     newLocation.state = location.state;
 
-    return this.locationRepository.save(newLocation);
+    return await this.locationRepository.save(newLocation);
   }
 }

@@ -32,7 +32,7 @@ export class ProfessionalService {
     professional.location = saveLocation;
     professional.service = saveService;
 
-    return this.professionalRepository.save(professional);
+    return await this.professionalRepository.save(professional);
   }
 
   async getProfessionalById(id: string): Promise<Professional> {
