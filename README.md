@@ -1,4 +1,7 @@
-<img src="../city-services/public/logo-city-services.jfif" width=100%>
+<h1 align="center">
+  <img src="../city-services/public/logo-city-services.png" alt="logo city services" width="500">
+</h1>
+
 
 # City Services API
 
