@@ -27,6 +27,6 @@ export class ContactService {
     newContact.email = contact.email;
     newContact.instagram = contact.instagram;
 
-    return this.contactRepository.save(newContact);
+    return await this.contactRepository.save(newContact);
   }
 }
