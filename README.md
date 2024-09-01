@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img src="../city-services/public/logo-city-services.png" alt="logo city services" width="500">
+  <img src="public/logo-city-services.png" alt="logo city services" width="500">
 </h1>
 
 
