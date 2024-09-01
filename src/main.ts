@@ -6,8 +6,10 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   const config = new DocumentBuilder()
-    .setTitle('API de Cadastro de Prestadores de Serviços por Localidade ')
-    .setDescription('Esta API permite que prestadores de serviços, como encanadores, eletricistas, professores particulares, entre outros, registrem seus serviços e informações de contato de forma eficiente.')
+    .setTitle('City Services API')
+    .setDescription(
+      'A API "City Services" permite gerenciar prestadores de serviços em diferentes cidades. Com essa API, você pode criar, consultar, atualizar e excluir informações sobre prestadores de serviços, além de buscar prestadores específicos com base na cidade ou categoria do serviço.',
+    )
     .setVersion('1.0')
     .addTag('tags')
     .build();
