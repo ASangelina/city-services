@@ -1,14 +1,32 @@
+<img src="../city-services/public/logo-city-services.jfif" width=100%>
+
 # City Services API
 
 ## Sobre
 
 A API City Services permite que prestadores de serviços, como encanadores, eletricistas, professores particulares, entre outros, registrem seus serviços e informações de contato de forma eficiente.
 
+## Tecnologias
+
+- ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
+- ![NestJS](https://img.shields.io/badge/nestjs-%23E0234E.svg?style=for-the-badge&logo=nestjs&logoColor=white)
+- ![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)
+
 ## Funcionalidades
 
-- Cadastro de profissionais com informações de contato e descrição dos serviços oferecidos.
-- Listagem de todos os profissionais cadastrados.
-- Busca de profissionais específicos (através do id).
+O sistema tem como requisito manter o prestador de serviço. Incluindo:
+
+- Criar prestador de Serviço​
+
+- Consultar prestador(es) de serviço(s)​
+
+- Atualizar prestador de Serviço​
+
+- Excluir prestador de serviço​
+
+- Consultar prestador de serviço pela cidade
+
+- Consultar prestador de serviço pela categoria do serviço
 
 ## Pré- Requisitos
 
@@ -55,13 +73,14 @@ Para executar o projeto em modo desenvolvimento:
 $ npm run start:dev
 ```
 
-A aplicação estará disponível em http://localhost:3000.
+A aplicação estará disponível na porta 3000, em http://localhost:3000.
+A documentação do Swagger estará disponível em http://localhost:3000/api.
 
 ## Deploy
 
-O deploy foi realizado na Railway e está disponível [neste link](https://city-services-development.up.railway.app/professionals).
+O deploy foi realizado na Railway e está disponível [neste link](https://city-services-production-410d.up.railway.app/).
 
-Para acessar a documentação no Swagger e explorar as rotas disponíveis na API [clique aqui](https://city-services-development.up.railway.app/api).
+Para acessar a documentação no Swagger e explorar as rotas disponíveis na API [clique aqui](https://city-services-production-410d.up.railway.app/api).
 
 ## Colaboradoras
 
