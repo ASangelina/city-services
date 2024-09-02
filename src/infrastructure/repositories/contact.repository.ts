@@ -18,15 +18,6 @@ export class ContactRepository implements IContactRepository {
     });
   }
 
-  async findByEmailOrPhoneNumber(
-    email: string,
-    phoneNumber: string,
-  ): Promise<Contact | null> {
-    return await this.contactRepository.findOne({
-      where: [{ email }, { phoneNumber }],
-    });
-  }
-
   async save(contact: Contact): Promise<Contact> {
     return await this.contactRepository.save(contact);
   }

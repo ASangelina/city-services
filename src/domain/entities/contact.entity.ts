@@ -6,10 +6,10 @@ export class Contact {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column()
+  @Column({ unique: true })
   phoneNumber: string;
 
-  @Column()
+  @Column({ unique: true })
   email: string;
 
   @Column()

@@ -11,15 +11,6 @@ export class LocationService {
   ) {}
 
   async createLocation(location: CreateLocationDto): Promise<Location> {
-    const locationExists = await this.locationRepository.findByCityAndState(
-      location.city,
-      location.state,
-    );
-
-    if (locationExists) {
-      return locationExists;
-    }
-
     const newLocation = new Location();
     newLocation.city = location.city;
     newLocation.state = location.state;
