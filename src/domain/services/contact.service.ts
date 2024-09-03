@@ -13,7 +13,6 @@ export class ContactService {
 
   async createContact(contact: CreateContactDto): Promise<Contact> {
     const contacts = await this.contactRepository.findAll();
-    console.log(contacts);
     ContactValidator.verifyEmail(contact.email);
     ContactValidator.checkEmailAlreadyInUse(contacts, contact.email);
     ContactValidator.checkPhoneAlreadyInUse(contacts, contact.phoneNumber);
