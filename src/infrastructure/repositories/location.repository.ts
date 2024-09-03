@@ -18,16 +18,12 @@ export class LocationRepository implements ILocationRepository {
     });
   }
 
-  async findByCityAndState(
-    city: string,
-    state: string,
-  ): Promise<Location | null> {
-    return await this.locationRepository.findOne({
-      where: { city, state },
-    });
-  }
-
   async save(location: Location): Promise<Location> {
     return await this.locationRepository.save(location);
+  }
+
+  async delete(id: string): Promise<boolean> {
+    const result = await this.locationRepository.delete(id);
+    return result.affected > 0;
   }
 }

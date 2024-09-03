@@ -11,19 +11,18 @@ export class LocationService {
   ) {}
 
   async createLocation(location: CreateLocationDto): Promise<Location> {
-    const locationExists = await this.locationRepository.findByCityAndState(
-      location.city,
-      location.state,
-    );
-
-    if (locationExists) {
-      return locationExists;
-    }
-
     const newLocation = new Location();
     newLocation.city = location.city;
     newLocation.state = location.state;
 
     return await this.locationRepository.save(newLocation);
+  }
+
+  async deleteLocation(id: string) {
+    const location = await this.locationRepository.findById(id);
+    if (!location) {
+      throw new Error('Location not found');
+    }
+    return await this.locationRepository.delete(id);
   }
 }

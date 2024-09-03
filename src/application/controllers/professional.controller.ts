@@ -153,7 +153,13 @@ export class ProfessionalController {
   })
   async deleteProfessional(@Param('id') id: string) {
     try {
-      return await this.professionalService.deleteProfessional(id);
+      const deleteProfessional =
+        await this.professionalService.deleteProfessional(id);
+      return {
+        statusCode: HttpStatus.OK,
+        message: 'Service provider deleted successfully',
+        data: deleteProfessional,
+      };
     } catch (error) {
       throw new BadRequestException({ error: error.message });
     }
