@@ -64,7 +64,18 @@ export class ProfessionalService {
   }
 
   async deleteProfessional(id: string): Promise<boolean> {
-    return await this.professionalRepository.delete(id);
+    const professional = await this.professionalRepository.findById(id);
+
+    if (!professional) {
+      throw new Error('Professional not found');
+    }
+
+    await this.professionalRepository.delete(id);
+
+    await this.contactService.deleteContact(professional.contact.id);
+    await this.locationService.deleteLocation(professional.location.id);
+    await this.serviceService.deleteService(professional.service.id);
+    return true;
   }
 
   async findProfessionalByCity(city: string): Promise<Professional[]> {
@@ -74,6 +85,8 @@ export class ProfessionalService {
   async findProfessionalByCategoryService(
     category: string,
   ): Promise<Professional[]> {
-    return await this.professionalRepository.findProfessionalByCategoryService(category);
+    return await this.professionalRepository.findProfessionalByCategoryService(
+      category,
+    );
   }
 }

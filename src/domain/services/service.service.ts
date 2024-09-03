@@ -17,4 +17,12 @@ export class ServiceService {
 
     return await this.serviceRepository.save(newService);
   }
+
+  async deleteService(id: string) {
+    const service = await this.serviceRepository.findById(id);
+    if (!service) {
+      throw new Error('Service not found');
+    }
+    return await this.serviceRepository.delete(id);
+  }
 }

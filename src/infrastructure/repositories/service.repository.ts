@@ -21,4 +21,10 @@ export class ServiceRepository implements IServiceRepository {
   async save(service: Service): Promise<Service> {
     return await this.serviceRepository.save(service);
   }
+
+  async delete(id: string): Promise<boolean> {
+    const result = await this.serviceRepository.delete(id);
+    return result.affected > 0;
+  }
+
 }

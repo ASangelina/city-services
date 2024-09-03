@@ -1,7 +1,8 @@
-import { ConflictException, Inject, Injectable } from '@nestjs/common';
 import { IContactRepository } from '../interfaces/contact.interface';
 import { CreateContactDto } from 'src/application/dtos/create-contact.dto';
 import { Contact } from '../entities/contact.entity';
+import { ContactValidator } from '../validator/contact.validator';
+import { Inject, Injectable } from '@nestjs/common';
 
 @Injectable()
 export class ContactService {
@@ -11,16 +12,10 @@ export class ContactService {
   ) {}
 
   async createContact(contact: CreateContactDto): Promise<Contact> {
-    const contactExists = await this.contactRepository.findByEmailOrPhoneNumber(
-      contact.email,
-      contact.phoneNumber,
-    );
-
-    if (contactExists) {
-      throw new ConflictException(
-        'Contact with the same email or phone number already exists.',
-      );
-    }
+    const contacts = await this.contactRepository.findAll();
+    ContactValidator.verifyEmail(contact.email);
+    ContactValidator.checkEmailAlreadyInUse(contacts, contact.email);
+    ContactValidator.checkPhoneAlreadyInUse(contacts, contact.phoneNumber);
 
     const newContact = new Contact();
     newContact.phoneNumber = contact.phoneNumber;
@@ -28,5 +23,13 @@ export class ContactService {
     newContact.instagram = contact.instagram;
 
     return await this.contactRepository.save(newContact);
+  }
+
+  async deleteContact(id: string) {
+    const contact = await this.contactRepository.findById(id);
+    if (!contact) {
+      throw new Error('Contact not found');
+    }
+    return await this.contactRepository.delete(id);
   }
 }
