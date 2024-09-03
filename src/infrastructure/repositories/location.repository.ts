@@ -21,4 +21,9 @@ export class LocationRepository implements ILocationRepository {
   async save(location: Location): Promise<Location> {
     return await this.locationRepository.save(location);
   }
+
+  async delete(id: string): Promise<boolean> {
+    const result = await this.locationRepository.delete(id);
+    return result.affected > 0;
+  }
 }

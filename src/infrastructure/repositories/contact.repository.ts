@@ -11,6 +11,12 @@ export class ContactRepository implements IContactRepository {
     private readonly contactRepository: Repository<Contact>,
   ) {}
 
+  async findAll(): Promise<Contact[]> {
+    return await this.contactRepository.find({
+      relations: ['professional'],
+    });
+  }
+
   async findById(id: string): Promise<Contact> {
     return this.contactRepository.findOne({
       where: { id },
@@ -20,5 +26,10 @@ export class ContactRepository implements IContactRepository {
 
   async save(contact: Contact): Promise<Contact> {
     return await this.contactRepository.save(contact);
+  }
+
+  async delete(id: string): Promise<boolean> {
+    const result = await this.contactRepository.delete(id);
+    return result.affected > 0;
   }
 }

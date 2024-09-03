@@ -17,4 +17,8 @@ export class LocationService {
 
     return await this.locationRepository.save(newLocation);
   }
+
+  async deleteLocation(id: string) {
+    return await this.locationRepository.delete(id);
+  }
 }

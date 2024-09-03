@@ -17,4 +17,8 @@ export class ServiceService {
 
     return await this.serviceRepository.save(newService);
   }
+
+  async deleteService(id: string) {
+    return await this.serviceRepository.delete(id)
+  }
 }

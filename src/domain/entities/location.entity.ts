@@ -13,7 +13,6 @@ export class Location {
   state: string;
 
   @ManyToOne(() => Professional, (professional) => professional.location, {
-    onDelete: 'CASCADE',
   })
   professionals: Professional[];
 }

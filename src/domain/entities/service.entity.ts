@@ -13,7 +13,6 @@ export class Service {
   category: string;
 
   @OneToMany(() => Professional, (professional) => professional.service, {
-    onDelete: 'CASCADE',
   })
   professionals: Professional[];
 }
