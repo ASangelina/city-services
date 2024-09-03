@@ -158,6 +158,7 @@ export class ProfessionalController {
       return {
         statusCode: HttpStatus.OK,
         message: 'Service provider deleted successfully',
+        data: deleteProfessional,
       };
     } catch (error) {
       throw new BadRequestException({ error: error.message });
