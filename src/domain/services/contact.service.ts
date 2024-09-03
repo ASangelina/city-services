@@ -2,7 +2,7 @@ import { IContactRepository } from '../interfaces/contact.interface';
 import { CreateContactDto } from 'src/application/dtos/create-contact.dto';
 import { Contact } from '../entities/contact.entity';
 import { ContactValidator } from '../validator/contact.validator';
-import { Inject, Injectable } from "@nestjs/common";
+import { Inject, Injectable } from '@nestjs/common';
 
 @Injectable()
 export class ContactService {
@@ -26,6 +26,10 @@ export class ContactService {
   }
 
   async deleteContact(id: string) {
-    return await this.contactRepository.delete(id)
+    const contact = await this.contactRepository.findById(id);
+    if (!contact) {
+      throw new Error('Contact not found');
+    }
+    return await this.contactRepository.delete(id);
   }
 }

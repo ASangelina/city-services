@@ -19,6 +19,10 @@ export class LocationService {
   }
 
   async deleteLocation(id: string) {
+    const location = await this.locationRepository.findById(id);
+    if (!location) {
+      throw new Error('Location not found');
+    }
     return await this.locationRepository.delete(id);
   }
 }

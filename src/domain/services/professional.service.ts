@@ -65,25 +65,17 @@ export class ProfessionalService {
 
   async deleteProfessional(id: string): Promise<boolean> {
     const professional = await this.professionalRepository.findById(id);
-    const deleteProfessional = await this.professionalRepository.delete(id);
-    const deleteContact = await this.contactService.deleteContact(
-      professional.contact.id,
-    );
-    const deleteLocation = await this.locationService.deleteLocation(
-      professional.location.id,
-    );
-    const deleteService = await this.serviceService.deleteService(
-      professional.service.id,
-    );
-    if (
-      deleteService &&
-      deleteLocation &&
-      deleteContact &&
-      deleteProfessional
-    ) {
-      return true;
+
+    if (!professional) {
+      throw new Error('Professional not found');
     }
-    return false;
+
+    await this.professionalRepository.delete(id);
+
+    await this.contactService.deleteContact(professional.contact.id);
+    await this.locationService.deleteLocation(professional.location.id);
+    await this.serviceService.deleteService(professional.service.id);
+    return true;
   }
 
   async findProfessionalByCity(city: string): Promise<Professional[]> {
