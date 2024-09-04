@@ -64,11 +64,7 @@ export class ProfessionalService {
   }
 
   async deleteProfessional(id: string): Promise<boolean> {
-    const professional = await this.professionalRepository.findById(id);
-
-    if (!professional) {
-      throw new Error('Professional not found');
-    }
+    const professional = await this.getProfessionalById(id);
 
     await this.professionalRepository.delete(id);
 

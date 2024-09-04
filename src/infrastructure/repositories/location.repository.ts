@@ -14,7 +14,6 @@ export class LocationRepository implements ILocationRepository {
   async findById(id: string): Promise<Location> {
     return this.locationRepository.findOne({
       where: { id },
-      relations: ['professional'],
     });
   }
 

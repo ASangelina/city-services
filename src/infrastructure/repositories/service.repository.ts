@@ -14,7 +14,6 @@ export class ServiceRepository implements IServiceRepository {
   async findById(id: string): Promise<Service> {
     return this.serviceRepository.findOne({
       where: { id },
-      relations: ['professional'],
     });
   }
 
@@ -26,5 +25,4 @@ export class ServiceRepository implements IServiceRepository {
     const result = await this.serviceRepository.delete(id);
     return result.affected > 0;
   }
-
 }

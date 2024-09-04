@@ -6,16 +6,15 @@ export class Contact {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column()
+  @Column({ unique: true })
   phoneNumber: string;
 
-  @Column()
+  @Column({ unique: true })
   email: string;
 
   @Column()
   instagram: string;
 
-  @OneToOne(() => Professional, (professional) => professional.contact, {
-  })
+  @OneToOne(() => Professional, (professional) => professional.contact, {})
   professional: Professional;
 }
